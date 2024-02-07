@@ -27,6 +27,7 @@ public class AuthorServiceImpl implements AuthorService  {
 		return authorrepository.findAll();
 	}
 	
+	
 
 	@Override
 	public String deleteAuthor(long authorId) {
@@ -65,6 +66,7 @@ public class AuthorServiceImpl implements AuthorService  {
 
 	@Override
 	public Author findByAuthorId(long authorId) {
+		
 		
 		return authorrepository.findById(authorId).orElseThrow(() ->new  EntityNotFoundException("Author not found By"+authorId));
 	}

@@ -26,6 +26,7 @@ public class Book {
 		this.bookId = bookId;
 		this.bookName = bookName;
 		this.bookPrice = bookPrice;
+		
 	}
 	
 	

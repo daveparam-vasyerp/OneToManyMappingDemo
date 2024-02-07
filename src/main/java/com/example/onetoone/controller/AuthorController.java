@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.onetoone.model.Author;
 import com.example.onetoone.service.AuthorService;
 import com.example.onetoone.service.BookService;
+import com.example.onetoone.service.FileService;
 
 @RestController
 @RequestMapping("/author")
@@ -25,6 +28,8 @@ import com.example.onetoone.service.BookService;
 public class AuthorController {
 	@Autowired
 	private AuthorService authorservice;
+	@Autowired
+	private FileService fileService;
 	
 	@GetMapping("/getAuthor")
 	
@@ -51,5 +56,18 @@ public class AuthorController {
 	@PostMapping("/assingBook/{authorId}/{bookId}")
 	public ResponseEntity<Author> assignBook(@PathVariable long authorId,@PathVariable long bookId){
 		return ResponseEntity.ok(authorservice.AssignBook(authorId, bookId));
+	}
+	@PostMapping("/upload")
+	public ResponseEntity<String> fileupload(@RequestParam("file") MultipartFile file){
+		return fileService.fileupload(file);
+	}
+	@GetMapping("/download/{filename}")
+	
+	public ResponseEntity<Object> filedownload(@PathVariable String filename){
+		return fileService.filedownload(filename);
+	}
+	@PostMapping("/append")
+	public ResponseEntity<String> fileAppend(@RequestParam String file,@RequestParam("content") String content){
+		return fileService.fileAppend(file,content);
 	}
 }
