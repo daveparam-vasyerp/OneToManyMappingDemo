@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.onetoone.dto.ResponceDto;
 import com.example.onetoone.model.Author;
 import com.example.onetoone.model.Book;
 import com.example.onetoone.service.BookService;
@@ -27,12 +28,15 @@ public class BookController {
 		return new ResponseEntity<>(bookservice.getAllBook(),HttpStatus.OK);
 	}
 	@GetMapping("/getBook/{BookId}")
-	public ResponseEntity<Book> getBookById(@PathVariable long BookId){
-		return ResponseEntity.ok(bookservice.getBookById(BookId));
+	public ResponceDto getBookById(@PathVariable long BookId){
+		Book book=bookservice.getBookById(BookId);
+		return new ResponceDto(200,"Book is present",book);
 	}
+	
 	@PostMapping("/addBook")
-	public ResponseEntity<Book> saveBook(@RequestBody Book book){
-		return ResponseEntity.ok(bookservice.saveBook(book));
+	public ResponceDto saveBook(@RequestBody Book book){
+		Book book2=bookservice.saveBook(book);
+		return new ResponceDto(200,"Book is added successfully",book2);
 	}
 
 }

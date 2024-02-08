@@ -14,11 +14,29 @@ public class CustomExceptionHendler  {
 	
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	@ExceptionHandler(AuthorNotFound.class)
-		public ResponceDto authorNotfoundHendler(Exception ex) {
+		public ResponceDto authorNotfound(AuthorNotFound ex) {
 			ResponceDto responce=new ResponceDto(404,"error",ex.getMessage());
 			return responce;
 			
 		}
+	@ResponseStatus(code = HttpStatus.NOT_FOUND)
+	@ExceptionHandler(AuthorNotFound.class)
+		public ResponceDto bookNotFound(AuthorNotFound ex) {
+			ResponceDto responce=new ResponceDto(404,"error",ex.getMessage());
+			return responce;
+			
+		}
+	
+	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler(Exception.class)
+		public ResponceDto GeneralException(Exception ex) {
+			ResponceDto responce=new ResponceDto(404,"error",ex.toString());
+			return responce;
+			
+		}
+	
+	
+	
 		
 		
 		

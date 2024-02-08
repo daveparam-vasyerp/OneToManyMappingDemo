@@ -73,6 +73,7 @@ public class FileServiceImpl implements FileService {
 	public ResponseEntity<String> fileAppend(String file, String content) {
 
 		try {
+			
 			Path myFilePath = Paths.get(UPLOAD_DIR).resolve(file).normalize();
 
 			if (!Files.exists(myFilePath)) {
