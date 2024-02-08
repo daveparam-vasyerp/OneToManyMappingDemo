@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.onetoone.Exeption.AuthorNotFound;
+import com.example.onetoone.dto.ResponceDto;
 import com.example.onetoone.model.Author;
 import com.example.onetoone.model.Book;
 import com.example.onetoone.repository.AuthorRepository;
@@ -47,7 +49,7 @@ public class AuthorServiceImpl implements AuthorService  {
 
 	@Override
 	public Author updateAuthoe(Author author) {
-		Author existingAuthor=findByAuthorId(author.getAuthorId()) ;
+		Author existingAuthor=authorrepository.findById(author.getAuthorId()).orElseThrow(() ->new  AuthorNotFound("Author not found By "+ author.getAuthorId())) ;
 		
 		if(author.getAuthorName()!=null && author.getAuthorName().isEmpty()) {
 			existingAuthor.setAuthorName(author.getAuthorName());
@@ -65,10 +67,10 @@ public class AuthorServiceImpl implements AuthorService  {
 	
 
 	@Override
-	public Author findByAuthorId(long authorId) {
+	public ResponceDto findByAuthorId(long authorId) {
 		
 		
-		return authorrepository.findById(authorId).orElseThrow(() ->new  EntityNotFoundException("Author not found By"+authorId));
+		return new ResponceDto(200,"ok",authorrepository.findById(authorId).orElseThrow(() ->new  AuthorNotFound("Author not found By"+authorId)));
 	}
 
 

@@ -2,6 +2,7 @@ package com.example.onetoone.service;
 
 import java.util.List;
 
+import com.example.onetoone.dto.ResponceDto;
 import com.example.onetoone.model.Author;
 
 public interface AuthorService {
@@ -11,7 +12,7 @@ public interface AuthorService {
 	public String deleteAuthor(long authorId);
 	public Author addAuthor(Author author);
 	public Author updateAuthoe(Author author);
-	public Author findByAuthorId(long authorId);
+	public ResponceDto findByAuthorId(long authorId);
 	public Author AssignBook(long authorId,long bookId);
 	
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.onetoone.dto.ResponceDto;
 import com.example.onetoone.model.Author;
 import com.example.onetoone.service.AuthorService;
 import com.example.onetoone.service.BookService;
@@ -37,8 +38,10 @@ public class AuthorController {
 		return new 	ResponseEntity<>(authorservice.getAll(),HttpStatus.OK);
 	}
 	@GetMapping("/getAuthor/{AuthorId}")
-	public ResponseEntity<Author> findByAuthorId(@PathVariable long AuthorId){
-		return ResponseEntity.ok(authorservice.findByAuthorId(AuthorId));
+	public ResponceDto findByAuthorId(@PathVariable long AuthorId){
+		return authorservice.findByAuthorId(AuthorId);
+	
+		
 		
 	}
 	@DeleteMapping("/deleteAuthor/{AuthorId}")
